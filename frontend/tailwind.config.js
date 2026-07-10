@@ -1,0 +1,101 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50: "#F0F0FF",
+          100: "#E0DFFF",
+          200: "#C2BFFF",
+          300: "#A39FFF",
+          400: "#857FFF",
+          500: "#6C63FF",
+          600: "#5A52D9",
+          700: "#4841B3",
+          800: "#36308D",
+          900: "#242066",
+        },
+        secondary: {
+          50: "#FFF0F3",
+          100: "#FFE0E6",
+          200: "#FFC2CD",
+          300: "#FFA3B4",
+          400: "#FF859B",
+          500: "#FF6584",
+          600: "#E55574",
+          700: "#CC4564",
+          800: "#B23554",
+          900: "#992544",
+        },
+        gray: {
+          50: "#F8F9FA",
+          100: "#F1F3F5",
+          200: "#E9ECEF",
+          300: "#DEE2E6",
+          400: "#CED4DA",
+          500: "#ADB5BD",
+          600: "#6C757D",
+          700: "#495057",
+          800: "#343A40",
+          900: "#212529",
+        },
+        success: "#22C55E",
+        warning: "#F59E0B",
+        error: "#EF4444",
+        info: "#3B82F6",
+      },
+      fontFamily: {
+        sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+        poppins: ["Poppins", "Inter", "sans-serif"],
+      },
+      spacing: {
+        18: "4.5rem",
+        72: "18rem",
+        84: "21rem",
+        96: "24rem",
+      },
+      borderRadius: {
+        xl: "1rem",
+        "2xl": "1.5rem",
+        "3xl": "2rem",
+      },
+      boxShadow: {
+        sm: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+        md: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+        lg: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+        xl: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+        "2xl": "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+        glow: "0 0 30px rgba(108, 99, 255, 0.15)",
+      },
+      animation: {
+        "bounce-slow": "bounce 3s infinite",
+        "pulse-slow": "pulse 3s infinite",
+        "slide-up": "slideUp 0.3s ease-out",
+        "slide-down": "slideDown 0.3s ease-out",
+        "fade-in": "fadeIn 0.3s ease-out",
+        "scale-up": "scaleUp 0.2s ease-out",
+        "spin-slow": "spin 3s linear infinite",
+      },
+      keyframes: {
+        slideUp: {
+          "0%": { transform: "translateY(10px)", opacity: 0 },
+          "100%": { transform: "translateY(0)", opacity: 1 },
+        },
+        slideDown: {
+          "0%": { transform: "translateY(-10px)", opacity: 0 },
+          "100%": { transform: "translateY(0)", opacity: 1 },
+        },
+        fadeIn: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
+        scaleUp: {
+          "0%": { transform: "scale(0.95)", opacity: 0 },
+          "100%": { transform: "scale(1)", opacity: 1 },
+        },
+      },
+    },
+  },
+  plugins: [],
+};
