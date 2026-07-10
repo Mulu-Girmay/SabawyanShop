@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api/v1";
 
 const api = axios.create({
   baseURL: API_URL,
@@ -9,6 +9,7 @@ const api = axios.create({
   },
 });
 
+// Request interceptor - Add token
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("accessToken");
@@ -20,6 +21,7 @@ api.interceptors.request.use(
   (error) => Promise.reject(error),
 );
 
+// Response interceptor - Handle token refresh
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -43,7 +45,6 @@ api.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${accessToken}`;
         return api(originalRequest);
       } catch (refreshError) {
-        // Refresh failed - logout user
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         window.location.href = "/login";

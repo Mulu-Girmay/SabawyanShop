@@ -1,6 +1,7 @@
 import User from "../models/User.js";
-import { uploadToCloudinary } from "../utils/cloudinary.js";
+import { uploadToCloudinary } from "../config/cloudinary.js";
 import logger from "../utils/logger.js";
+import Notification from "../models/Notification.js";
 
 export const getProfile = async (req, res, next) => {
   try {

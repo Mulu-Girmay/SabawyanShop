@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import { sendEmail } from "../utils/email.js";
 import logger from "../utils/logger.js";
+import bcrypt from "bcryptjs";
 
 const generateTokens = (user) => {
   const payload = {

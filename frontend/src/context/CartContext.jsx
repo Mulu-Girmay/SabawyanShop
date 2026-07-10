@@ -18,7 +18,12 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
-      setCartItems(JSON.parse(storedCart));
+      try {
+        setCartItems(JSON.parse(storedCart));
+      } catch (error) {
+        console.error("Error parsing cart:", error);
+        localStorage.removeItem("cart");
+      }
     }
   }, []);
 
@@ -45,9 +50,9 @@ export const CartProvider = ({ children }) => {
           productId: product._id,
           title: product.title,
           price: product.discountPrice || product.price,
-          image: product.images[0],
+          image: product.images?.[0] || "",
           quantity,
-          sellerId: product.seller._id,
+          sellerId: product.seller?._id || product.seller,
         },
       ];
     });
@@ -99,3 +104,5 @@ export const CartProvider = ({ children }) => {
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
+
+export default CartContext;

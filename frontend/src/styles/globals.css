@@ -1,7 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap");
 @import "./variables.css";
 @import "./animations.css";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -17,11 +15,7 @@
 
   body {
     @apply bg-gray-50 text-gray-900 antialiased;
-    font-family:
-      "Inter",
-      system-ui,
-      -apple-system,
-      sans-serif;
+    font-family: var(--font-primary);
   }
 
   h1,
@@ -30,7 +24,7 @@
   h4,
   h5,
   h6 {
-    font-family: "Poppins", "Inter", sans-serif;
+    font-family: var(--font-secondary);
   }
 }
 
@@ -68,4 +62,14 @@
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-500;
+}
+
+/* Selection */
+::selection {
+  @apply bg-primary-500 text-white;
+}
+
+/* Focus Styles */
+*:focus-visible {
+  @apply outline-none ring-2 ring-primary-500 ring-offset-2;
 }

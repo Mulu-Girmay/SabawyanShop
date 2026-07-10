@@ -1,6 +1,7 @@
 import * as authService from "../services/auth.service.js";
 import { validateRegistration, validateLogin } from "../utils/validators.js";
 import logger from "../utils/logger.js";
+import User from "../models/User.js";
 
 export const register = async (req, res, next) => {
   try {

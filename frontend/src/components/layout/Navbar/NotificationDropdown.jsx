@@ -2,28 +2,23 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BellIcon } from "@heroicons/react/24/outline";
 import { notificationService } from "../../../services/notification.service";
-import { useAuth } from "../../../context/AuthContext";
-import { formatDistanceToNow } from "date-fns";
 
 const NotificationDropdown = () => {
-  const { user } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (user) {
-      fetchNotifications();
-    }
-  }, [user]);
+    fetchNotifications();
+  }, []);
 
   const fetchNotifications = async () => {
     try {
       setLoading(true);
       const response = await notificationService.getAll({ limit: 10 });
-      setNotifications(response.data);
-      setUnreadCount(response.unreadCount);
+      setNotifications(response.data || []);
+      setUnreadCount(response.unreadCount || 0);
     } catch (error) {
       console.error("Error fetching notifications:", error);
     } finally {
@@ -57,6 +52,19 @@ const NotificationDropdown = () => {
     }
   };
 
+  const getTimeAgo = (date) => {
+    const diff = Date.now() - new Date(date).getTime();
+    const minutes = Math.floor(diff / 60000);
+    const hours = Math.floor(diff / 3600000);
+    const days = Math.floor(diff / 86400000);
+
+    if (minutes < 1) return "Just now";
+    if (minutes < 60) return `${minutes}m ago`;
+    if (hours < 24) return `${hours}h ago`;
+    if (days < 7) return `${days}d ago`;
+    return new Date(date).toLocaleDateString();
+  };
+
   return (
     <div className="relative">
       <button
@@ -66,7 +74,7 @@ const NotificationDropdown = () => {
         <BellIcon className="h-6 w-6" />
         {unreadCount > 0 && (
           <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-error text-xs font-bold text-white">
-            {unreadCount}
+            {unreadCount > 9 ? "9+" : unreadCount}
           </span>
         )}
       </button>
@@ -107,15 +115,13 @@ const NotificationDropdown = () => {
                   <div className="flex items-start space-x-3">
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-gray-900">
-                        {notification.title}
+                        {notification.title || "Notification"}
                       </p>
                       <p className="text-sm text-gray-600 truncate">
                         {notification.message}
                       </p>
                       <p className="text-xs text-gray-400 mt-1">
-                        {formatDistanceToNow(new Date(notification.createdAt), {
-                          addSuffix: true,
-                        })}
+                        {getTimeAgo(notification.createdAt)}
                       </p>
                     </div>
                     {!notification.read && (

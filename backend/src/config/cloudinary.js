@@ -1,6 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 import streamifier from "streamifier";
-import logger from "./logger.js";
+import logger from "../utils/logger.js";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

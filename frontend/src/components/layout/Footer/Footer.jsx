@@ -1,11 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  FacebookIcon,
-  TwitterIcon,
-  InstagramIcon,
-  YoutubeIcon,
-} from "@heroicons/react/24/outline";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -110,25 +104,25 @@ const Footer = () => {
                 href="#"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                <FacebookIcon className="h-6 w-6" />
+                📘
               </a>
               <a
                 href="#"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                <TwitterIcon className="h-6 w-6" />
+                🐦
               </a>
               <a
                 href="#"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                <InstagramIcon className="h-6 w-6" />
+                📷
               </a>
               <a
                 href="#"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                <YoutubeIcon className="h-6 w-6" />
+                ▶️
               </a>
             </div>
             <p className="text-sm text-gray-400 mt-4">

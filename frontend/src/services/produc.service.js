@@ -42,11 +42,4 @@ export const productService = {
     const response = await api.get(`/products/seller/${sellerId}`, { params });
     return response.data;
   },
-
-  search: async (query, params = {}) => {
-    const response = await api.get("/products/search", {
-      params: { query, ...params },
-    });
-    return response.data;
-  },
 };

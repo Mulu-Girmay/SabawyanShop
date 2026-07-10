@@ -3,22 +3,20 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../../common/Modal/Modal";
 import { productService } from "../../../services/product.service";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { useDebounce } from "../../../hooks/useDebounce";
 
 const SearchModal = ({ isOpen, onClose }) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const debouncedQuery = useDebounce(query, 500);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (debouncedQuery.length >= 2) {
-      searchProducts(debouncedQuery);
+    if (query.length >= 2) {
+      searchProducts(query);
     } else {
       setResults([]);
     }
-  }, [debouncedQuery]);
+  }, [query]);
 
   const searchProducts = async (searchQuery) => {
     try {
@@ -27,9 +25,10 @@ const SearchModal = ({ isOpen, onClose }) => {
         search: searchQuery,
         limit: 10,
       });
-      setResults(response.data);
+      setResults(response.data || []);
     } catch (error) {
       console.error("Search error:", error);
+      setResults([]);
     } finally {
       setLoading(false);
     }
@@ -72,7 +71,7 @@ const SearchModal = ({ isOpen, onClose }) => {
                 onClick={() => handleSelect(product)}
               >
                 <img
-                  src={product.images[0]}
+                  src={product.images?.[0] || "https://via.placeholder.com/48"}
                   alt={product.title}
                   className="h-12 w-12 rounded-lg object-cover"
                 />
