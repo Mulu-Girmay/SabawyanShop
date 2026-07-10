@@ -41,9 +41,9 @@ process.on("uncaughtException", (err) => {
 
 // Start server
 httpServer.listen(PORT, () => {
-  logger.info(`🚀 CollabCart Backend running on port ${PORT}`);
-  logger.info(`📦 Environment: ${process.env.NODE_ENV}`);
-  logger.info(`🔗 API URL: http://localhost:${PORT}/api/v1`);
+  logger.info(`Backend running on port ${PORT}`);
+  logger.info(`Environment: ${process.env.NODE_ENV}`);
+  logger.info(`API URL: http://localhost:${PORT}/api/v1`);
 });
 
 export default httpServer;
