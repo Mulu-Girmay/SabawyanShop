@@ -117,7 +117,7 @@ const orderSchema = new mongoose.Schema(
 );
 
 // Pre-save middleware to generate order number
-orderSchema.pre("save", async function (next) {
+orderSchema.pre("save", async function () {
   if (this.isNew && !this.orderNumber) {
     const date = new Date();
     const year = date.getFullYear().toString().slice(-2);
@@ -128,7 +128,6 @@ orderSchema.pre("save", async function (next) {
       .padStart(4, "0");
     this.orderNumber = `COLLAB-${year}${month}${day}-${random}`;
   }
-  next();
 });
 
 // Indexes
