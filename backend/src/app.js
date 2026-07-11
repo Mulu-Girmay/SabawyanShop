@@ -7,12 +7,12 @@ import morgan from "morgan";
 import compression from "compression";
 import { createServer } from "http";
 import { Server } from "socket.io";
-import connectDB from "./config/db.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 import { authenticate } from "./middleware/auth.js";
 import chatSocket from "./sockets/chat.socket.js";
 import logger from "./utils/logger.js";
 import jwt from "jsonwebtoken";
+import connectDB from "./config/database.js";
 
 // Import routes
 import authRoutes from "./routes/auth.routes.js";
@@ -50,10 +50,8 @@ const io = new Server(httpServer, {
   pingInterval: 25000,
 });
 
-// Connect to MongoDB
 connectDB();
 
-// Middleware
 app.use(helmet());
 
 const ALLOWED_ORIGINS = [
