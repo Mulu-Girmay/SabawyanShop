@@ -10,3 +10,27 @@
 2026-07-10 18:04:41 [info]: Environment: development  
 2026-07-10 18:04:41 [info]: API URL: http://localhost:5001/api/v1  
 2026-07-10 18:04:41 [info]: MongoDB Connected: localhost  
+2026-07-11 04:02:25 [info]: Backend running on port 5001  
+2026-07-11 04:02:25 [info]: Environment: development  
+2026-07-11 04:02:25 [info]: API URL: http://localhost:5001/api/v1  
+2026-07-11 04:02:25 [info]: MongoDB Connected: localhost  
+2026-07-11 04:04:29 [error]: jwt malformed {"name":"JsonWebTokenError"} JsonWebTokenError: jwt malformed
+    at module.exports [as verify] (C:\SabawyanShop\backend\node_modules\jsonwebtoken\verify.js:70:17)
+    at authenticate (file:///C:/SabawyanShop/backend/src/middleware/auth.js:18:25)
+    at Layer.handleRequest (C:\SabawyanShop\backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (C:\SabawyanShop\backend\node_modules\router\index.js:342:13)
+    at C:\SabawyanShop\backend\node_modules\router\index.js:297:9
+    at processParams (C:\SabawyanShop\backend\node_modules\router\index.js:582:12)
+    at next (C:\SabawyanShop\backend\node_modules\router\index.js:291:5)
+    at Function.handle (C:\SabawyanShop\backend\node_modules\router\index.js:186:3)
+    at router (C:\SabawyanShop\backend\node_modules\router\index.js:60:12)
+    at Layer.handleRequest (C:\SabawyanShop\backend\node_modules\router\lib\layer.js:152:17)
+2026-07-11 04:04:53 [info]: Backend running on port 5001  
+2026-07-11 04:04:53 [info]: Environment: development  
+2026-07-11 04:04:53 [info]: API URL: http://localhost:5001/api/v1  
+2026-07-11 04:04:53 [info]: MongoDB Connected: localhost  
+2026-07-11 04:05:00 [info]: Backend running on port 5001  
+2026-07-11 04:05:00 [info]: Environment: development  
+2026-07-11 04:05:00 [info]: API URL: http://localhost:5001/api/v1  
+2026-07-11 04:05:00 [info]: MongoDB Connected: localhost  
+2026-07-11 04:06:17 [info]: Received shutdown signal, closing server gracefully...  

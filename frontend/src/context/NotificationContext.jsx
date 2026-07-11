@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { notificationService } from "../services/notification.service";
+import { useAuth } from "./AuthContext";
 import toast from "react-hot-toast";
 
 const NotificationContext = createContext();
@@ -13,6 +14,7 @@ export const useNotifications = () => {
 };
 
 export const NotificationProvider = ({ children }) => {
+  const { isAuthenticated, loading: authLoading } = useAuth();
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -75,8 +77,16 @@ export const NotificationProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchNotifications();
-  }, []);
+    // Wait for auth to finish loading, then only fetch if authenticated
+    if (!authLoading && isAuthenticated) {
+      fetchNotifications();
+    }
+    // Clear notifications when user logs out
+    if (!authLoading && !isAuthenticated) {
+      setNotifications([]);
+      setUnreadCount(0);
+    }
+  }, [isAuthenticated, authLoading]);
 
   const value = {
     notifications,

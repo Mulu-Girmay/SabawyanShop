@@ -1,149 +1,149 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { BellIcon } from "@heroicons/react/24/outline";
-import { notificationService } from "../../../services/notification.service";
+import { motion, AnimatePresence } from "framer-motion";
+import { BellIcon, CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useNotifications } from "../../../context/NotificationContext";
+import { useAuth } from "../../../context/AuthContext";
+
+/* ── close on outside click ──────────────────────────────── */
+function useOutsideClick(ref, handler) {
+  useEffect(() => {
+    const fn = (e) => { if (ref.current && !ref.current.contains(e.target)) handler(); };
+    document.addEventListener("mousedown", fn);
+    return () => document.removeEventListener("mousedown", fn);
+  }, [ref, handler]);
+}
+
+const getTimeAgo = (date) => {
+  if (!date) return "just now";
+  const diff    = Date.now() - new Date(date).getTime();
+  const minutes = Math.floor(diff / 60000);
+  const hours   = Math.floor(diff / 3600000);
+  const days    = Math.floor(diff / 86400000);
+  if (minutes < 1)  return "just now";
+  if (minutes < 60) return `${minutes}m ago`;
+  if (hours   < 24) return `${hours}h ago`;
+  if (days    < 7)  return `${days}d ago`;
+  return new Date(date).toLocaleDateString();
+};
 
 const NotificationDropdown = () => {
+  const { isAuthenticated }                               = useAuth();
+  const { notifications, unreadCount, loading,
+          markAsRead, markAllAsRead, deleteNotification } = useNotifications();
   const [isOpen, setIsOpen] = useState(false);
-  const [notifications, setNotifications] = useState([]);
-  const [unreadCount, setUnreadCount] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const ref                 = useRef(null);
 
-  useEffect(() => {
-    fetchNotifications();
-  }, []);
+  useOutsideClick(ref, () => setIsOpen(false));
 
-  const fetchNotifications = async () => {
-    try {
-      setLoading(true);
-      const response = await notificationService.getAll({ limit: 10 });
-      setNotifications(response.data || []);
-      setUnreadCount(response.unreadCount || 0);
-    } catch (error) {
-      console.error("Error fetching notifications:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  /* Don't render the bell at all for unauthenticated users */
+  if (!isAuthenticated) return null;
 
-  const handleMarkAsRead = async (id) => {
-    try {
-      await notificationService.markAsRead(id);
-      setNotifications((prev) =>
-        prev.map((notif) =>
-          notif._id === id ? { ...notif, read: true } : notif,
-        ),
-      );
-      setUnreadCount((prev) => Math.max(0, prev - 1));
-    } catch (error) {
-      console.error("Error marking notification as read:", error);
-    }
-  };
-
-  const handleMarkAllAsRead = async () => {
-    try {
-      await notificationService.markAllAsRead();
-      setNotifications((prev) =>
-        prev.map((notif) => ({ ...notif, read: true })),
-      );
-      setUnreadCount(0);
-    } catch (error) {
-      console.error("Error marking all as read:", error);
-    }
-  };
-
-  const getTimeAgo = (date) => {
-    const diff = Date.now() - new Date(date).getTime();
-    const minutes = Math.floor(diff / 60000);
-    const hours = Math.floor(diff / 3600000);
-    const days = Math.floor(diff / 86400000);
-
-    if (minutes < 1) return "Just now";
-    if (minutes < 60) return `${minutes}m ago`;
-    if (hours < 24) return `${hours}h ago`;
-    if (days < 7) return `${days}d ago`;
-    return new Date(date).toLocaleDateString();
-  };
+  const preview = (notifications || []).slice(0, 8);
 
   return (
-    <div className="relative">
+    <div ref={ref} className="relative">
+      {/* Bell button */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2 text-gray-400 hover:text-gray-600 transition-colors"
+        onClick={() => setIsOpen((v) => !v)}
+        className={`relative p-2 rounded-xl transition ${isOpen ? "bg-primary-50 text-primary-600" : "text-gray-500 hover:bg-gray-100"}`}
       >
-        <BellIcon className="h-6 w-6" />
+        <BellIcon className="h-5 w-5" />
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-error text-xs font-bold text-white">
+          <motion.span
+            key={unreadCount}
+            initial={{ scale: 0.5 }}
+            animate={{ scale: 1 }}
+            className="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs font-bold text-white"
+          >
             {unreadCount > 9 ? "9+" : unreadCount}
-          </span>
+          </motion.span>
         )}
       </button>
 
-      {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 max-h-96 overflow-y-auto bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50">
-          <div className="flex items-center justify-between px-4 py-2 border-b border-gray-100">
-            <h3 className="font-semibold text-gray-900">Notifications</h3>
-            {unreadCount > 0 && (
-              <button
-                onClick={handleMarkAllAsRead}
-                className="text-sm text-primary-500 hover:text-primary-600"
-              >
-                Mark all as read
-              </button>
-            )}
-          </div>
-
-          {loading ? (
-            <div className="flex justify-center py-8">
-              <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-200 border-t-primary-500"></div>
-            </div>
-          ) : notifications.length === 0 ? (
-            <div className="py-8 text-center text-gray-500">
-              <BellIcon className="mx-auto h-12 w-12 text-gray-300" />
-              <p className="mt-2">No notifications yet</p>
-            </div>
-          ) : (
-            <div className="divide-y divide-gray-100">
-              {notifications.map((notification) => (
-                <div
-                  key={notification._id}
-                  className={`px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer ${
-                    !notification.read ? "bg-primary-50" : ""
-                  }`}
-                  onClick={() => handleMarkAsRead(notification._id)}
+      {/* Dropdown */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 6, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 6, scale: 0.97 }}
+            transition={{ duration: 0.15 }}
+            className="absolute right-0 top-full mt-2 w-80 bg-white rounded-2xl shadow-xl border border-gray-100 z-50 overflow-hidden"
+          >
+            {/* header */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
+              <div className="flex items-center gap-2">
+                <h3 className="font-bold text-gray-900 text-sm">Notifications</h3>
+                {unreadCount > 0 && (
+                  <span className="text-xs font-bold bg-primary-100 text-primary-600 px-1.5 py-0.5 rounded-full">
+                    {unreadCount}
+                  </span>
+                )}
+              </div>
+              {unreadCount > 0 && (
+                <button
+                  onClick={markAllAsRead}
+                  className="text-xs font-semibold text-primary-500 hover:text-primary-700 flex items-center gap-1 transition"
                 >
-                  <div className="flex items-start space-x-3">
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900">
-                        {notification.title || "Notification"}
-                      </p>
-                      <p className="text-sm text-gray-600 truncate">
-                        {notification.message}
-                      </p>
-                      <p className="text-xs text-gray-400 mt-1">
-                        {getTimeAgo(notification.createdAt)}
-                      </p>
-                    </div>
-                    {!notification.read && (
-                      <div className="h-2 w-2 rounded-full bg-primary-500 flex-shrink-0 mt-2"></div>
-                    )}
-                  </div>
-                </div>
-              ))}
+                  <CheckIcon className="h-3.5 w-3.5" /> All read
+                </button>
+              )}
             </div>
-          )}
 
-          <div className="px-4 py-2 border-t border-gray-100">
-            <Link
-              to="/notifications"
-              className="block text-center text-sm text-primary-500 hover:text-primary-600"
-              onClick={() => setIsOpen(false)}
-            >
-              View all notifications
-            </Link>
-          </div>
-        </div>
-      )}
+            {/* list */}
+            <div className="max-h-80 overflow-y-auto divide-y divide-gray-50">
+              {loading ? (
+                <div className="py-8 flex justify-center">
+                  <div className="h-7 w-7 animate-spin rounded-full border-4 border-gray-200 border-t-primary-500" />
+                </div>
+              ) : preview.length === 0 ? (
+                <div className="py-10 text-center">
+                  <BellIcon className="mx-auto h-10 w-10 text-gray-200 mb-2" />
+                  <p className="text-sm text-gray-400">No notifications yet</p>
+                </div>
+              ) : (
+                preview.map((notif) => (
+                  <div
+                    key={notif._id}
+                    className={`flex items-start gap-3 px-4 py-3 hover:bg-gray-50 transition cursor-pointer group ${!notif.read ? "bg-primary-50/50" : ""}`}
+                    onClick={() => !notif.read && markAsRead(notif._id)}
+                  >
+                    {/* unread dot */}
+                    <div className={`mt-1.5 h-2 w-2 rounded-full shrink-0 ${!notif.read ? "bg-primary-500" : "bg-transparent"}`} />
+                    <div className="flex-1 min-w-0">
+                      {notif.title && (
+                        <p className="text-xs font-bold text-gray-900 truncate">{notif.title}</p>
+                      )}
+                      <p className={`text-xs leading-snug line-clamp-2 ${!notif.read ? "text-gray-800 font-medium" : "text-gray-500"}`}>
+                        {notif.message}
+                      </p>
+                      <p className="text-xs text-gray-400 mt-0.5">{getTimeAgo(notif.createdAt)}</p>
+                    </div>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); deleteNotification(notif._id); }}
+                      className="opacity-0 group-hover:opacity-100 p-1 rounded-lg hover:bg-red-50 text-gray-300 hover:text-red-400 transition shrink-0"
+                    >
+                      <XMarkIcon className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+                ))
+              )}
+            </div>
+
+            {/* footer */}
+            <div className="border-t border-gray-100 px-4 py-2.5">
+              <Link
+                to="/notifications"
+                onClick={() => setIsOpen(false)}
+                className="block text-center text-xs font-semibold text-primary-600 hover:text-primary-700 transition"
+              >
+                View all notifications →
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
