@@ -5,6 +5,7 @@ import CartItem from "../models/CartItem.js";
 import Notification from "../models/Notification.js";
 import { io } from "../app.js";
 import logger from "../utils/logger.js";
+import mongoose from "mongoose";
 
 export const createOrder = async (req, res, next) => {
   try {
@@ -22,10 +23,13 @@ export const createOrder = async (req, res, next) => {
     // Validate items and calculate totals
     let subtotal = 0;
     const orderItems = [];
-    const sellerId = items[0].sellerId; // Assuming single seller per order
+    let sellerId = null; // will be derived from product DB record, not client body
 
     for (const item of items) {
-      const product = await Product.findById(item.productId);
+      const product = await Product.findById(item.productId).populate(
+        "seller",
+        "_id",
+      );
 
       if (!product) {
         return res.status(404).json({
@@ -51,6 +55,11 @@ export const createOrder = async (req, res, next) => {
       const price = product.discountPrice || product.price;
       const total = price * item.quantity;
       subtotal += total;
+
+      // Derive sellerId from DB — never trust the client-supplied value
+      if (!sellerId) {
+        sellerId = product.seller?._id || product.seller;
+      }
 
       orderItems.push({
         product: product._id,
@@ -110,6 +119,7 @@ export const createOrder = async (req, res, next) => {
       recipient: sellerId,
       sender: userId,
       type: "order",
+      title: "New Order Received",
       message: `New order #${orderNumber} received!`,
       data: { orderId: order._id, total: order.total },
     });
@@ -305,6 +315,7 @@ export const updateOrderStatus = async (req, res, next) => {
       recipient: order.buyer._id,
       sender: userId,
       type: "order",
+      title: "Order Status Updated",
       message: `Order #${order.orderNumber} status updated to ${status}`,
       data: { orderId: order._id, status },
     });
@@ -374,6 +385,7 @@ export const cancelOrder = async (req, res, next) => {
       recipient: order.seller,
       sender: userId,
       type: "order",
+      title: "Order Cancelled",
       message: `Order #${order.orderNumber} has been cancelled`,
       data: { orderId: order._id },
     });
@@ -392,10 +404,12 @@ export const cancelOrder = async (req, res, next) => {
 export const getOrderStats = async (req, res, next) => {
   try {
     const userId = req.user.id;
+    // Mongoose aggregate does not auto-cast strings to ObjectId — must cast explicitly
+    const userObjectId = new mongoose.Types.ObjectId(userId);
 
     // For buyers
     const buyerStats = await Order.aggregate([
-      { $match: { buyer: userId } },
+      { $match: { buyer: userObjectId } },
       {
         $group: {
           _id: null,
@@ -408,7 +422,7 @@ export const getOrderStats = async (req, res, next) => {
 
     // For sellers
     const sellerStats = await Order.aggregate([
-      { $match: { seller: userId } },
+      { $match: { seller: userObjectId } },
       {
         $group: {
           _id: "$status",

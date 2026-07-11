@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { StarIcon, ShoppingCartIcon, HeartIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartSolid } from "@heroicons/react/24/solid";
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../../context/CartContext";
 import { useState } from "react";
 import toast from "react-hot-toast";
 

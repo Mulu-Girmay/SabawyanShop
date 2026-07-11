@@ -1,75 +1,108 @@
+@import "tailwindcss";
 @import "./variables.css";
 @import "./animations.css";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
+@theme {
+  /* Map CSS variables to Tailwind theme tokens so classes like
+     bg-primary-500, text-secondary-500, etc. work throughout the app. */
+  --color-primary-50:  #f0effe;
+  --color-primary-100: #e4e2fd;
+  --color-primary-200: #cbc8fb;
+  --color-primary-300: #a9a3f7;
+  --color-primary-400: #8b83ff;
+  --color-primary-500: #6c63ff;
+  --color-primary-600: #5a52d9;
+  --color-primary-700: #4840b0;
+  --color-primary-800: #38318c;
+  --color-primary-900: #2c2770;
+
+  --color-secondary-50:  #fff0f3;
+  --color-secondary-100: #ffe4ea;
+  --color-secondary-200: #ffccd8;
+  --color-secondary-300: #ffa3b8;
+  --color-secondary-400: #ff85a0;
+  --color-secondary-500: #ff6584;
+  --color-secondary-600: #e55574;
+  --color-secondary-700: #c0415e;
+  --color-secondary-800: #99304b;
+  --color-secondary-900: #7a253c;
+
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error:   #ef4444;
+  --color-info:    #3b82f6;
+}
 
 @layer base {
   * {
-    @apply border-gray-200;
+    box-sizing: border-box;
   }
 
   html {
-    @apply scroll-smooth;
+    scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-gray-50 text-gray-900 antialiased;
+    margin: 0;
+    background-color: #f9fafb; /* gray-50 */
+    color: #111827;             /* gray-900 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     font-family: var(--font-primary);
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-secondary);
+  }
+
+  /* Remove #root width constraint from Vite scaffold */
+  #root {
+    width: 100%;
+    text-align: left;
   }
 }
 
 @layer components {
   .container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: 80rem; /* 7xl */
+    margin-inline: auto;
+    padding-inline: 1rem;
   }
 
   .card-hover {
-    @apply transition-all duration-200 hover:shadow-lg hover:-translate-y-1;
+    transition: box-shadow 200ms ease, transform 200ms ease;
+  }
+  .card-hover:hover {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    transform: translateY(-4px);
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent;
+    background: linear-gradient(to right, var(--color-primary-500), var(--color-secondary-500));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .gradient-bg {
-    @apply bg-gradient-to-r from-primary-500 to-secondary-500;
+    background: linear-gradient(to right, var(--color-primary-500), var(--color-secondary-500));
   }
 }
 
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #64748b; }
 
-::-webkit-scrollbar-track {
-  @apply bg-gray-100;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-gray-400 rounded-full;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-500;
-}
-
-/* Selection */
+/* ── Selection ─────────────────────────────────────────────── */
 ::selection {
-  @apply bg-primary-500 text-white;
+  background-color: var(--color-primary-500);
+  color: #fff;
 }
 
-/* Focus Styles */
+/* ── Focus ─────────────────────────────────────────────────── */
 *:focus-visible {
-  @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
 }

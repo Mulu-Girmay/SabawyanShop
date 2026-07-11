@@ -19,11 +19,14 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     if (isAuthenticated && user) {
-      const newSocket = io(import.meta.env.VITE_WS_URL, {
+      const newSocket = io(import.meta.env.VITE_WS_URL || "http://localhost:5001", {
         auth: {
           token: localStorage.getItem("accessToken"),
         },
-        transports: ["websocket"],
+        transports: ["websocket", "polling"],
+        reconnection: true,
+        reconnectionAttempts: 5,
+        reconnectionDelay: 1000,
       });
 
       newSocket.on("connect", () => {

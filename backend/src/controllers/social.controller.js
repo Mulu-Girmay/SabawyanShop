@@ -29,6 +29,7 @@ export const createPost = async (req, res, next) => {
         recipient: followerId,
         sender: userId,
         type: "post",
+        title: "New Post",
         message: `${user.fullName} created a new post`,
         data: { postId: post._id },
       }));
@@ -188,6 +189,7 @@ export const likePost = async (req, res, next) => {
           recipient: post.author,
           sender: userId,
           type: "like",
+          title: "New Like",
           message: `${req.user.fullName} liked your post`,
           data: { postId: id },
         });
@@ -250,6 +252,7 @@ export const commentOnPost = async (req, res, next) => {
         recipient: post.author,
         sender: userId,
         type: "comment",
+        title: "New Comment",
         message: `${req.user.fullName} commented on your post`,
         data: { postId: id, commentId: newComment._id },
       });

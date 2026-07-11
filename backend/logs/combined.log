@@ -6,3 +6,7 @@
 2026-07-10 17:51:44 [info]: Environment: development  
 2026-07-10 17:51:44 [info]: API URL: http://localhost:5001/api/v1  
 2026-07-10 17:51:44 [info]: MongoDB Connected: localhost  
+2026-07-10 18:04:41 [info]: Backend running on port 5001  
+2026-07-10 18:04:41 [info]: Environment: development  
+2026-07-10 18:04:41 [info]: API URL: http://localhost:5001/api/v1  
+2026-07-10 18:04:41 [info]: MongoDB Connected: localhost  

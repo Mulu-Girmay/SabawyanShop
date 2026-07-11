@@ -92,6 +92,7 @@ export const createGroupBuy = async (req, res, next) => {
         recipient: followerId,
         sender: userId,
         type: "group_buy",
+        title: "New Group Buy",
         message: `${creator.fullName} started a group buy for ${product.title}`,
         data: { groupBuyId: groupBuy._id, productId },
       }));
@@ -193,6 +194,7 @@ export const joinGroupBuy = async (req, res, next) => {
         recipient: groupBuy.creator,
         sender: userId,
         type: "group_buy",
+        title: "New Member Joined",
         message: `${req.user.fullName} joined your group buy`,
         data: { groupBuyId, memberCount: groupBuy.members.length },
       });
@@ -354,6 +356,7 @@ export const cancelGroupBuy = async (req, res, next) => {
       recipient: memberId,
       sender: userId,
       type: "group_buy",
+      title: "Group Buy Cancelled",
       message: `The group buy for ${groupBuy.product.title} has been cancelled`,
       data: { groupBuyId: id },
     }));
@@ -447,6 +450,7 @@ const fulfillGroupBuy = async (groupBuyId) => {
       recipient: member.user._id,
       sender: groupBuy.creator,
       type: "group_buy",
+      title: "Group Buy Fulfilled!",
       message: `🎉 Group buy complete! Your order for ${groupBuy.product.title} is being processed.`,
       data: { groupBuyId, orderId: member.orderId },
     }));

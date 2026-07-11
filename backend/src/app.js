@@ -22,6 +22,9 @@ import socialRoutes from "./routes/social.routes.js";
 import groupBuyRoutes from "./routes/groupbuy.routes.js";
 import orderRoutes from "./routes/order.routes.js";
 import chatRoutes from "./routes/chat.routes.js";
+import notificationRoutes from "./routes/notification.routes.js";
+import adminRoutes from "./routes/admin.routes.js";
+import cartRoutes from "./routes/cart.routes.js";
 
 const app = express();
 const httpServer = createServer(app);
@@ -72,6 +75,9 @@ app.use("/api/v1/social", socialRoutes);
 app.use("/api/v1/group-buy", groupBuyRoutes);
 app.use("/api/v1/orders", orderRoutes);
 app.use("/api/v1/chat", chatRoutes);
+app.use("/api/v1/notifications", notificationRoutes);
+app.use("/api/v1/admin", adminRoutes);
+app.use("/api/v1/cart", cartRoutes);
 
 // 404 handler
 app.use((req, res) => {

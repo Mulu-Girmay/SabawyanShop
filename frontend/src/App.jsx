@@ -8,6 +8,7 @@ import {
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { SocketProvider } from "./context/SocketContext";
+import { NotificationProvider } from "./context/NotificationContext";
 import { ToastProvider } from "./components/common/Toast/Toast";
 
 // Layout
@@ -30,6 +31,7 @@ import Cart from "./pages/Cart/Cart";
 import Checkout from "./pages/Checkout/Checkout";
 import Settings from "./pages/Settings/Settings";
 import SellerDashboard from "./pages/SellerDashboard/SellerDashboard";
+import Notifications from "./pages/Notifications/Notifications";
 
 import "./index.css";
 
@@ -76,6 +78,7 @@ function App() {
     <Router>
       <AuthProvider>
         <SocketProvider>
+          <NotificationProvider>
           <CartProvider>
             <ToastProvider>
               <div className="flex flex-col min-h-screen">
@@ -118,6 +121,10 @@ function App() {
                       }
                     />
                     <Route
+                      path="/profile/:username"
+                      element={<Profile />}
+                    />
+                    <Route
                       path="/cart"
                       element={
                         <ProtectedRoute>
@@ -141,6 +148,14 @@ function App() {
                         </ProtectedRoute>
                       }
                     />
+                    <Route
+                      path="/notifications"
+                      element={
+                        <ProtectedRoute>
+                          <Notifications />
+                        </ProtectedRoute>
+                      }
+                    />
 
                     {/* Seller Routes */}
                     <Route
@@ -160,6 +175,7 @@ function App() {
               </div>
             </ToastProvider>
           </CartProvider>
+          </NotificationProvider>
         </SocketProvider>
       </AuthProvider>
     </Router>

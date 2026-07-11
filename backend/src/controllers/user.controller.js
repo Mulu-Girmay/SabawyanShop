@@ -2,6 +2,7 @@ import User from "../models/User.js";
 import { uploadToCloudinary } from "../config/cloudinary.js";
 import logger from "../utils/logger.js";
 import Notification from "../models/Notification.js";
+import mongoose from "mongoose";
 
 export const getProfile = async (req, res, next) => {
   try {
@@ -146,6 +147,7 @@ export const followUser = async (req, res, next) => {
       recipient: userId,
       sender: currentUserId,
       type: "follow",
+      title: "New Follower",
       message: `${currentUser.fullName} started following you`,
     });
 
@@ -258,11 +260,15 @@ export const getSuggestions = async (req, res, next) => {
     );
 
     // Get users not followed and not self
+    // Use $and to combine both _id conditions — duplicate keys in a single
+    // object silently drop the first one in JS, so we must use $and here
     const suggestions = await User.aggregate([
       {
         $match: {
-          _id: { $ne: req.user.id },
-          _id: { $nin: currentUser.following },
+          $and: [
+            { _id: { $ne: new mongoose.Types.ObjectId(req.user.id) } },
+            { _id: { $nin: currentUser.following } },
+          ],
           isActive: true,
         },
       },

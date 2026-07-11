@@ -3,6 +3,7 @@ import Product from "../models/Product.js";
 import Order from "../models/Order.js";
 import Post from "../models/Post.js";
 import Notification from "../models/Notification.js";
+import { io } from "../app.js";
 import logger from "../utils/logger.js";
 import GroupBuy from "../models/GroupBuy.js";
 

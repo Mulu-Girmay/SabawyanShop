@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-import Button from "../../components/common/Button/Button";
-import Input from "../../components/common/Input/Input";
-import Card from "../../components/common/Card/Card";
+import { useAuth } from "../../../context/AuthContext";
+import Button from "../../common/Button/Button";
+import Input from "../../common/Input/Input";
+import Card from "../../common/Card/Card";
 import {
   EnvelopeIcon,
   LockClosedIcon,

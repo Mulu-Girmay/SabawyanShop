@@ -35,17 +35,18 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (credentials) => {
     try {
-      const response = await authService.login(credentials);
-      const { user, accessToken, refreshToken } = response.data;
+      // authService.login() calls POST /auth/login, destructures
+      // response.data.data to store tokens, then returns response.data
+      // which has shape { success, message, data: { user, accessToken, refreshToken } }
+      const responseData = await authService.login(credentials);
+      const user = responseData.data?.user || responseData.user;
 
       setUser(user);
       setIsAuthenticated(true);
       localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("refreshToken", refreshToken);
 
       toast.success("Welcome back!");
-      return response;
+      return responseData;
     } catch (error) {
       toast.error(error.response?.data?.error || "Login failed");
       throw error;

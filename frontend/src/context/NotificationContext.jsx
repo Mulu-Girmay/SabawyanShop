@@ -33,6 +33,7 @@ export const NotificationProvider = ({ children }) => {
   const markAsRead = async (id) => {
     try {
       await notificationService.markAsRead(id);
+      // Backend model field is 'read', not 'isRead'
       setNotifications((prev) =>
         prev.map((n) => (n._id === id ? { ...n, read: true } : n))
       );
@@ -58,6 +59,21 @@ export const NotificationProvider = ({ children }) => {
     setUnreadCount((prev) => prev + 1);
   };
 
+  const deleteNotification = async (id) => {
+    try {
+      const target = notifications.find((n) => n._id === id);
+      await notificationService.delete(id);
+      setNotifications((prev) => prev.filter((n) => n._id !== id));
+      // Backend field is 'read', adjust unread count if it was unread
+      if (target && !target.read) {
+        setUnreadCount((prev) => Math.max(0, prev - 1));
+      }
+    } catch (error) {
+      console.error("Error deleting notification:", error);
+      toast.error("Failed to delete notification");
+    }
+  };
+
   useEffect(() => {
     fetchNotifications();
   }, []);
@@ -70,6 +86,7 @@ export const NotificationProvider = ({ children }) => {
     markAsRead,
     markAllAsRead,
     addNotification,
+    deleteNotification,
   };
 
   return (
