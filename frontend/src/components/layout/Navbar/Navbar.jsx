@@ -29,16 +29,16 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
+      <nav className="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
-              <div className="h-8 w-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
-                <ShoppingBagIcon className="h-5 w-5 text-white" />
+              <div className="h-8 w-8 bg-primary-500 rounded-lg flex items-center justify-center">
+                <ShoppingBagIcon className="h-5 w-5 text-white font-bold" />
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">
-                CollabCart
+              <span className="text-xl font-bold text-primary-500">
+                Sabawyan
               </span>
             </Link>
 

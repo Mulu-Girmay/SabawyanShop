@@ -62,10 +62,10 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary-500 via-primary-600 to-secondary-500 py-20">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-white"></div>
-          <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-white"></div>
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-gray-50 py-20 lg:py-32">
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-1/4 right-0 h-96 w-96 rounded-full bg-primary-400 blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 h-96 w-96 rounded-full bg-accent-400 blur-3xl"></div>
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,33 +76,32 @@ const Home = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <span className="inline-block rounded-full bg-white/20 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
-                  🔥 50K+ Active Shoppers
+                <span className="inline-block rounded-full bg-primary-100 px-4 py-1.5 text-sm font-semibold text-primary-700">
+                  ✨ Shop Smarter, Save Bigger
                 </span>
               </motion.div>
 
               <motion.h1
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"
+                className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight text-balance"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                Shop Together, <br />
-                <span className="text-yellow-300">Save Together</span>
+                Discover <span className="text-primary-500">Premium</span> <br className="hidden sm:block" />
+                Products Together
               </motion.h1>
 
               <motion.p
-                className="text-lg text-white/90 max-w-lg"
+                className="text-lg text-gray-600 max-w-lg leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                Join millions of shoppers discovering amazing deals through
-                community buying. Start saving today!
+                Join millions of smart shoppers discovering exclusive deals through community buying power. Save more, shop smarter.
               </motion.p>
 
               <motion.div
-                className="flex flex-wrap gap-4"
+                className="flex flex-col sm:flex-row flex-wrap gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
@@ -110,7 +109,7 @@ const Home = () => {
                 <Button
                   variant="primary"
                   size="lg"
-                  className="bg-white text-primary-600 hover:bg-gray-100"
+                  className="bg-primary-500 text-white hover:bg-primary-600 px-8"
                 >
                   Start Shopping
                   <ArrowRightIcon className="ml-2 h-5 w-5" />
@@ -118,86 +117,80 @@ const Home = () => {
                 <Button
                   variant="secondary"
                   size="lg"
-                  className="border-white text-white hover:bg-white/10"
+                  className="border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8"
                 >
-                  Learn More
+                  View Catalog
                 </Button>
               </motion.div>
 
               <motion.div
-                className="flex gap-8 pt-4"
+                className="flex gap-8 pt-8"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
                 <div>
-                  <p className="text-2xl font-bold text-white">2M+</p>
-                  <p className="text-sm text-white/80">Shoppers</p>
+                  <p className="text-3xl font-bold text-gray-900">2M+</p>
+                  <p className="text-sm text-gray-600">Active Shoppers</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-white">50K+</p>
-                  <p className="text-sm text-white/80">Group Buys</p>
+                  <p className="text-3xl font-bold text-gray-900">50K+</p>
+                  <p className="text-sm text-gray-600">Active Deals</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-white">4.8★</p>
-                  <p className="text-sm text-white/80">Average Rating</p>
+                  <p className="text-3xl font-bold text-gray-900">4.8★</p>
+                  <p className="text-sm text-gray-600">Trusted Rating</p>
                 </div>
               </motion.div>
             </div>
 
             <motion.div
               className="hidden lg:block"
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <div className="relative">
-                <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-white/20 to-white/5 blur-2xl"></div>
+                <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-primary-200/30 to-accent-200/30 blur-2xl"></div>
                 <div className="relative grid grid-cols-2 gap-4">
                   <div className="space-y-4">
-                    <div className="rounded-2xl bg-white/10 backdrop-blur-sm p-6 text-white">
-                      <div className="flex items-center space-x-3">
-                        <ShoppingBagIcon className="h-8 w-8" />
-                        <div>
-                          <p className="font-semibold">Group Buy</p>
-                          <p className="text-sm text-white/80">Save 25%</p>
+                    <div className="rounded-2xl bg-white border-2 border-gray-100 p-6 hover:shadow-lg transition-shadow">
+                      <div className="flex items-center space-x-3 mb-2">
+                        <div className="h-12 w-12 bg-primary-100 rounded-xl flex items-center justify-center">
+                          <ShoppingBagIcon className="h-6 w-6 text-primary-500" />
                         </div>
                       </div>
+                      <p className="font-bold text-gray-900 text-lg">Group Buy</p>
+                      <p className="text-sm text-gray-600">Save up to 40%</p>
                     </div>
-                    <div className="rounded-2xl bg-white/10 backdrop-blur-sm p-6 text-white">
-                      <div className="flex items-center space-x-3">
-                        <UsersIcon className="h-8 w-8" />
-                        <div>
-                          <p className="font-semibold">12 Members</p>
-                          <p className="text-sm text-white/80">
-                            Joining together
-                          </p>
+                    <div className="rounded-2xl bg-white border-2 border-gray-100 p-6 hover:shadow-lg transition-shadow">
+                      <div className="flex items-center space-x-3 mb-2">
+                        <div className="h-12 w-12 bg-accent-100 rounded-xl flex items-center justify-center">
+                          <UsersIcon className="h-6 w-6 text-accent-500" />
                         </div>
                       </div>
+                      <p className="font-bold text-gray-900 text-lg">Community</p>
+                      <p className="text-sm text-gray-600">Build together</p>
                     </div>
                   </div>
                   <div className="space-y-4 mt-8">
-                    <div className="rounded-2xl bg-white/10 backdrop-blur-sm p-6 text-white">
-                      <div className="flex items-center space-x-3">
-                        <StarIcon className="h-8 w-8 text-yellow-300" />
-                        <div>
-                          <p className="font-semibold">4.9★ Rating</p>
-                          <p className="text-sm text-white/80">
-                            From 200+ reviews
-                          </p>
+                    <div className="rounded-2xl bg-white border-2 border-gray-100 p-6 hover:shadow-lg transition-shadow">
+                      <div className="flex items-center space-x-3 mb-2">
+                        <div className="h-12 w-12 bg-yellow-100 rounded-xl flex items-center justify-center">
+                          <StarIcon className="h-6 w-6 text-yellow-500" />
                         </div>
                       </div>
+                      <p className="font-bold text-gray-900 text-lg">4.9 Rating</p>
+                      <p className="text-sm text-gray-600">From 50K reviews</p>
                     </div>
-                    <div className="rounded-2xl bg-white/10 backdrop-blur-sm p-6 text-white">
-                      <div className="flex items-center space-x-3">
-                        <ChatBubbleLeftIcon className="h-8 w-8" />
-                        <div>
-                          <p className="font-semibold">Real-time Chat</p>
-                          <p className="text-sm text-white/80">
-                            Talk to sellers
-                          </p>
+                    <div className="rounded-2xl bg-white border-2 border-gray-100 p-6 hover:shadow-lg transition-shadow">
+                      <div className="flex items-center space-x-3 mb-2">
+                        <div className="h-12 w-12 bg-green-100 rounded-xl flex items-center justify-center">
+                          <ChatBubbleLeftIcon className="h-6 w-6 text-green-600" />
                         </div>
                       </div>
+                      <p className="font-bold text-gray-900 text-lg">Live Chat</p>
+                      <p className="text-sm text-gray-600">24/7 support</p>
                     </div>
                   </div>
                 </div>
@@ -208,28 +201,31 @@ const Home = () => {
       </section>
 
       {/* Categories Section */}
-      <section className="py-12 bg-gray-50">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold text-gray-900">
-              Shop by Category
-            </h2>
+          <div className="flex items-center justify-between mb-12">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+                Browse Categories
+              </h2>
+              <p className="text-gray-600 mt-2">Explore what millions are buying</p>
+            </div>
             <Link
               to="/products"
-              className="text-primary-500 hover:text-primary-600 font-medium"
+              className="text-primary-500 hover:text-primary-600 font-bold text-lg"
             >
-              View All →
+              See All →
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 gap-3">
             {categories.map((category) => (
               <Link
                 key={category.name}
                 to={`/products?category=${category.name}`}
-                className="group flex flex-col items-center rounded-xl bg-white p-4 shadow-sm transition-all hover:shadow-md hover:-translate-y-1"
+                className="group flex flex-col items-center rounded-2xl bg-gray-50 p-4 border-2 border-gray-100 hover:border-primary-300 hover:bg-primary-50 transition-all"
               >
-                <span className="text-3xl mb-2">{category.icon}</span>
-                <span className="text-sm font-medium text-gray-700 group-hover:text-primary-500">
+                <span className="text-4xl mb-3">{category.icon}</span>
+                <span className="text-xs font-bold text-gray-700 text-center group-hover:text-primary-600">
                   {category.name}
                 </span>
               </Link>
@@ -239,17 +235,20 @@ const Home = () => {
       </section>
 
       {/* Trending Group Buys */}
-      <section className="py-12">
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold text-gray-900">
-              🔥 Trending Group Buys
-            </h2>
+          <div className="flex items-center justify-between mb-12">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+                Trending Group Buys
+              </h2>
+              <p className="text-gray-600 mt-2">Limited time offers with massive savings</p>
+            </div>
             <Link
               to="/group-buy"
-              className="text-primary-500 hover:text-primary-600 font-medium"
+              className="text-primary-500 hover:text-primary-600 font-bold text-lg"
             >
-              View All →
+              See All →
             </Link>
           </div>
           {loading ? (
@@ -271,17 +270,20 @@ const Home = () => {
       </section>
 
       {/* Featured Products */}
-      <section className="py-12 bg-gray-50">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold text-gray-900">
-              ⚡ Featured Products
-            </h2>
+          <div className="flex items-center justify-between mb-12">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+                Featured Products
+              </h2>
+              <p className="text-gray-600 mt-2">Handpicked selections from top sellers</p>
+            </div>
             <Link
               to="/products"
-              className="text-primary-500 hover:text-primary-600 font-medium"
+              className="text-primary-500 hover:text-primary-600 font-bold text-lg"
             >
-              View All →
+              See All →
             </Link>
           </div>
           {loading ? (
@@ -303,17 +305,20 @@ const Home = () => {
       </section>
 
       {/* Social Feed */}
-      <section className="py-12">
+      <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold text-gray-900">
-              📱 Community Feed
-            </h2>
+          <div className="flex items-center justify-between mb-12">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+                Community Feed
+              </h2>
+              <p className="text-gray-600 mt-2">See what shoppers are buying and loving</p>
+            </div>
             <Link
               to="/feed"
-              className="text-primary-500 hover:text-primary-600 font-medium"
+              className="text-primary-500 hover:text-primary-600 font-bold text-lg"
             >
-              View All →
+              See All →
             </Link>
           </div>
           {loading ? (
@@ -335,47 +340,53 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-gradient-to-br from-primary-50 to-secondary-50">
+      <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900">
-              Why CollabCart?
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+              Why Sabawyan?
             </h2>
-            <p className="mt-2 text-gray-600">
+            <p className="mt-4 text-lg text-gray-600">
               The smarter way to shop with your community
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center p-8 hover:shadow-lg transition-shadow">
-              <div className="mx-auto h-16 w-16 rounded-full bg-primary-100 flex items-center justify-center mb-4">
-                <UserGroupIcon className="h-8 w-8 text-primary-500" />
+            <motion.div
+              whileHover={{ y: -8 }}
+              className="p-8 rounded-2xl border-2 border-gray-100 hover:border-primary-300 hover:shadow-lg transition-all bg-gradient-to-br from-gray-50 to-white"
+            >
+              <div className="h-14 w-14 rounded-full bg-primary-100 flex items-center justify-center mb-6">
+                <UserGroupIcon className="h-7 w-7 text-primary-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Group Buying</h3>
-              <p className="text-gray-600">
-                Team up with others to unlock exclusive discounts and save more
-                together.
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">Community Power</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Team up with millions to unlock exclusive discounts. The more you buy together, the more you save.
               </p>
-            </Card>
-            <Card className="text-center p-8 hover:shadow-lg transition-shadow">
-              <div className="mx-auto h-16 w-16 rounded-full bg-secondary-100 flex items-center justify-center mb-4">
-                <ChatBubbleLeftIcon className="h-8 w-8 text-secondary-500" />
+            </motion.div>
+            <motion.div
+              whileHover={{ y: -8 }}
+              className="p-8 rounded-2xl border-2 border-gray-100 hover:border-primary-300 hover:shadow-lg transition-all bg-gradient-to-br from-gray-50 to-white"
+            >
+              <div className="h-14 w-14 rounded-full bg-accent-100 flex items-center justify-center mb-6">
+                <ChatBubbleLeftIcon className="h-7 w-7 text-accent-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Real-time Chat</h3>
-              <p className="text-gray-600">
-                Connect directly with sellers, ask questions, and get instant
-                responses.
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">Direct Connection</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Chat directly with sellers in real-time. Get answers instantly, build trust, and make informed purchases.
               </p>
-            </Card>
-            <Card className="text-center p-8 hover:shadow-lg transition-shadow">
-              <div className="mx-auto h-16 w-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
-                <SparklesIcon className="h-8 w-8 text-success" />
+            </motion.div>
+            <motion.div
+              whileHover={{ y: -8 }}
+              className="p-8 rounded-2xl border-2 border-gray-100 hover:border-primary-300 hover:shadow-lg transition-all bg-gradient-to-br from-gray-50 to-white"
+            >
+              <div className="h-14 w-14 rounded-full bg-green-100 flex items-center justify-center mb-6">
+                <SparklesIcon className="h-7 w-7 text-green-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Community Driven</h3>
-              <p className="text-gray-600">
-                Discover products through your network and see what your friends
-                are buying.
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">Social Shopping</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Discover what friends are buying, share reviews, and be part of a thriving community of smart shoppers.
               </p>
-            </Card>
+            </motion.div>
           </div>
         </div>
       </section>

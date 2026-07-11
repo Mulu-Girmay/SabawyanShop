@@ -61,11 +61,15 @@ const Products = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-100 sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center gap-4">
+    <div className="min-h-screen bg-white">
+      {/* Header Section */}
+      <div className="bg-gradient-to-br from-primary-50 to-gray-50 border-b border-gray-100 sticky top-0 z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900">Explore Our Collections</h1>
+            <p className="text-gray-600 mt-2">Find exactly what you are looking for</p>
+          </div>
+          <div className="flex items-center gap-3">
             {/* Search */}
             <div className="flex-1 relative">
               <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
@@ -74,21 +78,21 @@ const Products = () => {
                 placeholder="Search products..."
                 value={filters.search}
                 onChange={(e) => updateFilter("search", e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 text-sm"
+                className="w-full pl-10 pr-4 py-3 rounded-lg border-2 border-gray-200 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent text-sm font-medium"
               />
             </div>
             {/* Sort */}
             <select
               value={filters.sort}
               onChange={(e) => updateFilter("sort", e.target.value)}
-              className="border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-400"
+              className="border-2 border-gray-200 rounded-lg px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent"
             >
               {SORT_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
             </select>
             {/* Filter toggle */}
             <button
               onClick={() => setShowFilters((v) => !v)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-medium transition ${showFilters ? "bg-primary-50 border-primary-300 text-primary-600" : "border-gray-200 text-gray-600"}`}
+              className={`flex items-center gap-2 px-5 py-3 rounded-lg border-2 text-sm font-bold transition ${showFilters ? "bg-primary-500 border-primary-500 text-white" : "border-gray-200 text-gray-700 hover:border-primary-400"}`}
             >
               <AdjustmentsHorizontalIcon className="h-4 w-4" />
               Filters
@@ -101,16 +105,16 @@ const Products = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="mt-4 pt-4 border-t border-gray-100"
+              className="mt-6 pt-6 border-t-2 border-gray-200"
             >
               <div className="flex flex-wrap gap-4 items-end">
                 {/* Category */}
                 <div>
-                  <label className="block text-xs font-medium text-gray-500 mb-1">Category</label>
+                  <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wide">Category</label>
                   <select
                     value={filters.category}
                     onChange={(e) => updateFilter("category", e.target.value)}
-                    className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-400"
+                    className="border-2 border-gray-200 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent"
                   >
                     <option value="">All Categories</option>
                     {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
@@ -118,37 +122,37 @@ const Products = () => {
                 </div>
                 {/* Price range */}
                 <div>
-                  <label className="block text-xs font-medium text-gray-500 mb-1">Min Price ($)</label>
+                  <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wide">Min Price</label>
                   <input
                     type="number"
                     value={filters.minPrice}
                     onChange={(e) => updateFilter("minPrice", e.target.value)}
                     placeholder="0"
-                    className="border border-gray-200 rounded-lg px-3 py-2 w-24 text-sm focus:outline-none focus:ring-2 focus:ring-primary-400"
+                    className="border-2 border-gray-200 rounded-lg px-3 py-2 w-24 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-500 mb-1">Max Price ($)</label>
+                  <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wide">Max Price</label>
                   <input
                     type="number"
                     value={filters.maxPrice}
                     onChange={(e) => updateFilter("maxPrice", e.target.value)}
                     placeholder="999"
-                    className="border border-gray-200 rounded-lg px-3 py-2 w-24 text-sm focus:outline-none focus:ring-2 focus:ring-primary-400"
+                    className="border-2 border-gray-200 rounded-lg px-3 py-2 w-24 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent"
                   />
                 </div>
                 {/* Group Buyable */}
-                <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                <label className="flex items-center gap-2 text-sm font-medium text-gray-700 cursor-pointer hover:text-primary-600 transition">
                   <input
                     type="checkbox"
                     checked={filters.isGroupBuyable}
                     onChange={(e) => updateFilter("isGroupBuyable", e.target.checked)}
-                    className="accent-primary-500"
+                    className="w-4 h-4 accent-primary-500"
                   />
-                  Group Buy Only
+                  Group Deals Only
                 </label>
-                <button onClick={clearFilters} className="flex items-center gap-1 text-sm text-gray-400 hover:text-red-500 transition">
-                  <XMarkIcon className="h-4 w-4" /> Clear
+                <button onClick={clearFilters} className="flex items-center gap-1 text-sm font-medium text-gray-400 hover:text-red-500 transition">
+                  <XMarkIcon className="h-4 w-4" /> Clear Filters
                 </button>
               </div>
             </motion.div>
@@ -157,19 +161,19 @@ const Products = () => {
       </div>
 
       {/* Product grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <p className="text-sm text-gray-500 mb-6">{total.toLocaleString()} products found</p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <p className="text-base font-semibold text-gray-600 mb-8">{total.toLocaleString()} products found</p>
         {loading ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
             {Array.from({ length: 16 }).map((_, i) => (
-              <div key={i} className="animate-pulse bg-white rounded-2xl h-72 shadow-sm" />
+              <div key={i} className="animate-pulse bg-gray-200 rounded-2xl h-80 border-2 border-gray-200" />
             ))}
           </div>
         ) : products.length === 0 ? (
-          <div className="text-center py-24">
-            <MagnifyingGlassIcon className="mx-auto h-16 w-16 text-gray-200 mb-4" />
-            <h3 className="text-lg font-semibold text-gray-500">No products found</h3>
-            <p className="text-sm text-gray-400 mt-1">Try adjusting your filters</p>
+          <div className="text-center py-32">
+            <MagnifyingGlassIcon className="mx-auto h-20 w-20 text-gray-300 mb-4" />
+            <h3 className="text-2xl font-bold text-gray-600">No products found</h3>
+            <p className="text-gray-500 mt-2">Try adjusting your search or filters</p>
           </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
@@ -181,21 +185,21 @@ const Products = () => {
 
         {/* Pagination */}
         {total > 16 && (
-          <div className="flex justify-center gap-2 mt-10">
+          <div className="flex justify-center items-center gap-4 mt-16">
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
-              className="px-4 py-2 rounded-lg border border-gray-200 text-sm disabled:opacity-40 hover:bg-gray-50"
+              className="px-6 py-3 rounded-lg border-2 border-gray-200 text-sm font-bold disabled:opacity-40 hover:border-primary-500 hover:text-primary-600 transition"
             >
-              Previous
+              ← Previous
             </button>
-            <span className="px-4 py-2 text-sm text-gray-600">Page {page} of {Math.ceil(total / 16)}</span>
+            <span className="px-6 py-3 text-sm font-bold text-gray-600">Page {page} of {Math.ceil(total / 16)}</span>
             <button
               onClick={() => setPage((p) => p + 1)}
               disabled={page >= Math.ceil(total / 16)}
-              className="px-4 py-2 rounded-lg border border-gray-200 text-sm disabled:opacity-40 hover:bg-gray-50"
+              className="px-6 py-3 rounded-lg border-2 border-gray-200 text-sm font-bold disabled:opacity-40 hover:border-primary-500 hover:text-primary-600 transition"
             >
-              Next
+              Next →
             </button>
           </div>
         )}

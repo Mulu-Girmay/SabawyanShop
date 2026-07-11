@@ -5,32 +5,32 @@
 @theme {
   /* Map CSS variables to Tailwind theme tokens so classes like
      bg-primary-500, text-secondary-500, etc. work throughout the app. */
-  --color-primary-50:  #f0effe;
-  --color-primary-100: #e4e2fd;
-  --color-primary-200: #cbc8fb;
-  --color-primary-300: #a9a3f7;
-  --color-primary-400: #8b83ff;
-  --color-primary-500: #6c63ff;
-  --color-primary-600: #5a52d9;
-  --color-primary-700: #4840b0;
-  --color-primary-800: #38318c;
-  --color-primary-900: #2c2770;
+  --color-primary-50:  #FEF5E7;
+  --color-primary-100: #FCE8CF;
+  --color-primary-200: #F9D5A0;
+  --color-primary-300: #F6C27C;
+  --color-primary-400: #F3AF57;
+  --color-primary-500: #F0A233;
+  --color-primary-600: #D68A2A;
+  --color-primary-700: #AC6B1E;
+  --color-primary-800: #824C14;
+  --color-primary-900: #5A320B;
 
-  --color-secondary-50:  #fff0f3;
-  --color-secondary-100: #ffe4ea;
-  --color-secondary-200: #ffccd8;
-  --color-secondary-300: #ffa3b8;
-  --color-secondary-400: #ff85a0;
-  --color-secondary-500: #ff6584;
-  --color-secondary-600: #e55574;
-  --color-secondary-700: #c0415e;
-  --color-secondary-800: #99304b;
-  --color-secondary-900: #7a253c;
+  --color-secondary-50:  #F5F5F5;
+  --color-secondary-100: #EEEEEE;
+  --color-secondary-200: #E0E0E0;
+  --color-secondary-300: #BDBDBD;
+  --color-secondary-400: #9E9E9E;
+  --color-secondary-500: #757575;
+  --color-secondary-600: #616161;
+  --color-secondary-700: #424242;
+  --color-secondary-800: #212121;
+  --color-secondary-900: #121212;
 
-  --color-success: #22c55e;
-  --color-warning: #f59e0b;
-  --color-error:   #ef4444;
-  --color-info:    #3b82f6;
+  --color-success: #4CAF50;
+  --color-warning: #FFC107;
+  --color-error:   #F44336;
+  --color-info:    #2196F3;
 }
 
 @layer base {
