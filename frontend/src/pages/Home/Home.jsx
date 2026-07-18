@@ -248,19 +248,6 @@ const Home = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="relative hidden lg:block"
             >
-              {/* floating -25% badge */}
-              <motion.span
-                animate={{ y: [0, -6, 0] }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="absolute -left-6 top-10 z-20 rounded-xl bg-red-500 px-3 py-1.5 text-xs font-bold text-white shadow-lg"
-              >
-                -25%
-              </motion.span>
-
               {/* main device card */}
               <div className="rounded-3xl bg-white shadow-2xl p-4 max-w-md ml-auto">
                 <div className="flex items-center justify-between pb-3 mb-3 border-b border-gray-100">
@@ -323,7 +310,7 @@ const Home = () => {
               </div>
 
               {/* floating "viewers" card */}
-              <motion.div
+              {/* <motion.div
                 animate={{ y: [0, -5, 0] }}
                 transition={{
                   duration: 3.4,
@@ -351,10 +338,10 @@ const Home = () => {
                     are viewing this deal
                   </p>
                 </div>
-              </motion.div>
+              </motion.div> */}
 
               {/* floating "joined" card */}
-              <motion.div
+              {/* <motion.div
                 animate={{ y: [0, 6, 0] }}
                 transition={{
                   duration: 3.6,
@@ -372,14 +359,14 @@ const Home = () => {
                     just now
                   </span>
                 </p>
-              </motion.div>
+              </motion.div> */}
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* ── TRUST BADGES ──────────────────────────────────── */}
-      <section className="bg-white border-b border-gray-100">
+      <section className="bg-gradient-to-br from-primary-50 to-secondary-50 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {TRUST.map(({ icon: Icon, title, desc }) => (
@@ -398,7 +385,7 @@ const Home = () => {
       </section>
 
       {/* ── CATEGORIES ────────────────────────────────────── */}
-      <section className="py-12">
+      <section className="py-12 bg-gradient-to-br from-primary-50 to-secondary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader title="Shop by Category" emoji="🗂️" href="/products" />
           <div className="grid grid-cols-4 sm:grid-cols-8 gap-3">
@@ -419,20 +406,22 @@ const Home = () => {
       </section>
 
       {/* ── FLASH SALE ────────────────────────────────────── */}
-      <section className="py-2 pb-12">
+      <section className="py-2 pb-12 bg-gradient-to-br from-primary-50 to-secondary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* header with countdown */}
           <div className="flex flex-wrap items-center justify-between gap-4 mb-7">
             <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1.5 rounded-xl bg-red-500 px-3 py-1.5">
-                <FireIcon className="h-4 w-4 text-white" />
-                <span className="text-sm font-bold text-white">Flash Sale</span>
+              <div className="flex items-center gap-1.5 rounded-xl bg-primary-100  px-3 py-1.5">
+                <FireIcon className="h-4 w-4 text-black" />
+                <span className="text-sm font-bold text-black/300">
+                  Flash Sale
+                </span>
               </div>
               <p className="text-sm text-gray-500">Ends in:</p>
               <div className="flex items-center gap-1">
                 {[h, m, s].map((unit, i) => (
                   <React.Fragment key={i}>
-                    <span className="flex items-center justify-center h-9 w-9 rounded-lg bg-gray-900 text-white text-sm font-bold tabular-nums">
+                    <span className="flex items-center justify-center h-9 w-9 rounded-lg bg-gray-700 text-white text-sm font-bold tabular-nums">
                       {unit}
                     </span>
                     {i < 2 && (
@@ -468,40 +457,40 @@ const Home = () => {
       </section>
 
       {/* ── PROMO BANNER ──────────────────────────────────── */}
-      <section className="py-2 pb-12">
+      <section className="py-2 pb-12 bg-gradient-to-br from-primary-50 to-secondary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-5">
             <Link
               to="/group-buy"
-              className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary-500 to-primary-700 p-8 flex flex-col justify-end min-h-48"
+              className="group relative overflow-hidden rounded-3xl bg-white p-8 flex flex-col justify-end min-h-48"
             >
               <div className="pointer-events-none absolute top-0 right-0 h-40 w-40 rounded-full bg-white/10 translate-x-8 -translate-y-8" />
-              <span className="text-xs font-bold uppercase tracking-widest text-white/70 mb-2">
+              <span className="text-xs font-bold uppercase tracking-widest text-black/70 mb-2">
                 Group Buying
               </span>
-              <h3 className="text-2xl font-extrabold text-white leading-tight">
+              <h3 className="text-2xl font-extrabold text-black leading-tight">
                 Save up to 40%
                 <br />
                 with your community
               </h3>
-              <div className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 group-hover:gap-3 transition-all">
+              <div className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-black/90 group-hover:gap-3 transition-all">
                 Start a Group Buy <ArrowRightIcon className="h-4 w-4" />
               </div>
             </Link>
             <Link
               to="/products?category=Electronics"
-              className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-secondary-500 to-secondary-700 p-8 flex flex-col justify-end min-h-48"
+              className="group relative overflow-hidden rounded-3xl bg-white p-8 flex flex-col justify-end min-h-48"
             >
               <div className="pointer-events-none absolute top-0 right-0 h-40 w-40 rounded-full bg-white/10 translate-x-8 -translate-y-8" />
-              <span className="text-xs font-bold uppercase tracking-widest text-white/70 mb-2">
+              <span className="text-xs font-bold uppercase tracking-widest text-black/70 mb-2">
                 New Arrivals
               </span>
-              <h3 className="text-2xl font-extrabold text-white leading-tight">
+              <h3 className="text-2xl font-extrabold text-black leading-tight">
                 Latest Electronics
                 <br />
                 Just Dropped
               </h3>
-              <div className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 group-hover:gap-3 transition-all">
+              <div className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-black/90 group-hover:gap-3 transition-all">
                 Shop Now <ArrowRightIcon className="h-4 w-4" />
               </div>
             </Link>
@@ -510,7 +499,7 @@ const Home = () => {
       </section>
 
       {/* ── FEATURED PRODUCTS ─────────────────────────────── */}
-      <section className="py-2 pb-12 bg-white">
+      <section className="py-2 pb-12 bg-gradient-to-br from-primary-50 to-secondary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
           <SectionHeader
             title="Featured Products"
@@ -542,7 +531,7 @@ const Home = () => {
       </section>
 
       {/* ── TRENDING GROUP BUYS ───────────────────────────── */}
-      <section className="py-12">
+      <section className="py-12 bg-gradient-to-br from-primary-50 to-secondary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             title="Trending Group Buys"
@@ -591,13 +580,13 @@ const Home = () => {
               },
               {
                 icon: ChatBubbleLeftIcon,
-                color: "bg-secondary-100 text-secondary-600",
+                color: "bg-primary-100 text-primary-600",
                 title: "Real-time Chat",
                 desc: "Connect directly with sellers, ask questions and get instant answers before you buy.",
               },
               {
                 icon: SparklesIcon,
-                color: "bg-green-100 text-green-600",
+                color: "bg-primary-100 text-primary-600",
                 title: "Community Driven",
                 desc: "Discover trending products through your network and see what your friends are buying.",
               },
@@ -623,7 +612,7 @@ const Home = () => {
       </section>
 
       {/* ── TESTIMONIALS ──────────────────────────────────── */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-gradient-to-br from-primary-50 to-secondary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-extrabold text-gray-900">
@@ -656,9 +645,9 @@ const Home = () => {
             ].map(({ name, avatar, review, stars }) => (
               <div
                 key={name}
-                className="rounded-2xl border border-gray-100 p-6 shadow-sm"
+                className="rounded-2xl border border-gray-100 p-6 shadow-sm bg-white hover:shadow-md transition-shadow"
               >
-                <div className="flex mb-3">
+                <div className="flex mb-3 ">
                   {Array.from({ length: stars }).map((_, i) => (
                     <StarIcon key={i} className="h-4 w-4 text-yellow-400" />
                   ))}
@@ -681,12 +670,12 @@ const Home = () => {
       </section>
 
       {/* ── CTA BANNER ────────────────────────────────────── */}
-      <section className="py-16 bg-gradient-to-r from-primary-600 to-secondary-500">
+      <section className="py-16 bg-gradient-to-br from-primary-50 to-secondary-50">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-black mb-4">
             Ready to save more together?
           </h2>
-          <p className="text-white/80 mb-8 text-lg">
+          <p className="text-black/80 mb-8 text-lg">
             Join over 2 million shoppers already saving with CollabCart.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
